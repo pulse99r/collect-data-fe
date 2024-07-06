@@ -1,5 +1,6 @@
 
 import './App.css';
+import { Users } from './components/Users';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <button id='upload' type="upload">Upload</button>
           </span>
         </form>
+        <Users />
       </main>
     </div>
   );
