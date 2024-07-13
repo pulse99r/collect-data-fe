@@ -1,31 +1,35 @@
 
+import { useState, useEffect } from 'react';
 import './App.css';
+import Nav from './components/Nav';
+import NewUser from './components/NewUser';
 import { Users } from './components/Users';
 
 function App() {
+  const [users, setUsers] = useState([])
+
+  const fetchUsers = async()=> {
+    try {
+      const response = await fetch("https://collect-data-be.onrender.com/users")
+      const data = await response.json()
+      setUsers(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+   useEffect(() => {
+    fetchUsers()
+   }, []);
+  console.log(users)
+
   return (
     <div className="App">
       <header className="App-header">
-        <nav className='nav'>
-          <ul className='menu'>
-            <li className='menu-item'>Data Entry</li>
-            <li className='menu-item'>View Users</li>
-          </ul>
-        </nav>
+       <Nav />
       </header>
       <main>
-        <form action="submit" id='form' className='form' >
-          <input id='fname' type="text" placeholder="enter first name"/>
-          <input id='lname' type="text" placeholder="enter last name"/>
-          <input id='city' type="text" placeholder="enter city"/>
-          <input id='website' type="text" placeholder="enter website"/>
-          <span className="btn-group">
-            <button id='submit' type="submit">Submit</button>
-            <button id='clear' type="clear">Clear</button>
-            <button id='upload' type="upload">Upload</button>
-          </span>
-        </form>
-        <Users />
+        <NewUser/>
+        <Users users = {users}/>
       </main>
     </div>
   );

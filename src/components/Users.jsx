@@ -1,29 +1,38 @@
 import React from 'react'
+import './Users.css'
 
-export const Users = () => {
+// import { useState, useEffect } from 'react'
+
+export const Users = ({users}) => {
+
   return (
-    <div>
+    <div className='user-content'>
       <h3>User Display</h3>
       <table id='users'>
-        <tr>
-          <th>First</th>
-          <th>Last</th>
-          <th>City</th>
-          <th>Website</th>
-        </tr>
-        <tr>
-          <td>name1</td>
-          <td>lname1</td>
-          <td>City1</td>
-          <td>Website1</td>
-        </tr>
-        <tr>
-          <td>name1</td>
-          <td>lname1</td>
-          <td>City1</td>
-          <td>Website1</td>
-        </tr>
-
+        <thead>
+          <tr>
+            <th>First</th>
+            <th>Last</th>
+            <th>City</th>
+            <th>Website</th>
+            <th>Created At</th>
+            <th>del</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => {
+            return (
+              <tr key = {user.id}>
+                <td className='user-item'>{user.fname}</td>
+                <td className='user-item'>{user.lname}</td>
+                <td className='user-item'>{user.city}</td>
+                <td className='user-item'>{user.website}</td>
+                <td className='user-item'>{user.created_at}</td>
+                <td className='user-item'>x</td>
+              </tr>
+            )
+          } )}
+        </tbody>
       </table>
     </div>
   )
